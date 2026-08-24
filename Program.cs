@@ -50,7 +50,27 @@ do
 }
 while (opcion != 2);
 
+// ETAPA 4
+
+const decimal DescuentoDiezPorCiento = 0.10m;
+const decimal DescuentoCincoPorCiento = 0.05m;
+
+decimal porcentajeDescuento = 0m;
+
+if (total > 50000m)
+{
+    porcentajeDescuento = DescuentoDiezPorCiento;
+}
+else if (total > 20000m)
+{
+    porcentajeDescuento = DescuentoCincoPorCiento;
+}
+
+decimal descuentoAplicado = total * porcentajeDescuento;
+decimal totalConDescuento = total - descuentoAplicado;
+
 Console.WriteLine();
 Console.WriteLine($"Cantidad de productos: {cantidadProductos}");
-Console.WriteLine($"Total de la venta: ${total}");
-
+Console.WriteLine($"Subtotal: ${total}");
+Console.WriteLine($"Descuento aplicado: ${descuentoAplicado}");
+Console.WriteLine($"Total con descuento: ${totalConDescuento}");

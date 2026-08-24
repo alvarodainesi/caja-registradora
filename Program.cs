@@ -69,11 +69,7 @@ else if (total > 20000m)
 decimal descuentoAplicado = total * porcentajeDescuento;
 decimal totalConDescuento = total - descuentoAplicado;
 
-Console.WriteLine();
-Console.WriteLine($"Cantidad de productos: {cantidadProductos}");
-Console.WriteLine($"Subtotal: ${total}");
-Console.WriteLine($"Descuento aplicado: ${descuentoAplicado}");
-Console.WriteLine($"Total con descuento: ${totalConDescuento}");
+
 
 // ETAPA 5
 
@@ -81,8 +77,10 @@ const decimal DescuentoEfectivo = 0.10m;
 const decimal RecargoCredito = 0.15m;
 
 decimal totalFinal = totalConDescuento;
+decimal descuentoMedioPago = 0m;
+decimal recargoAplicado = 0m;
 int opcionPago;
-string medioPago = "";
+
 
 do
 {
@@ -97,17 +95,19 @@ do
     switch (opcionPago)
     {
         case 1:
-            totalFinal -= totalFinal * DescuentoEfectivo;
-            medioPago = "Efectivo";
+            descuentoMedioPago = totalFinal * DescuentoEfectivo;
+            totalFinal -= descuentoMedioPago;
+            
             break;
 
         case 2:
-            medioPago = "Débito";
+            
             break;
 
         case 3:
-            totalFinal += totalFinal * RecargoCredito;
-            medioPago = "Crédito";
+            recargoAplicado = totalFinal * RecargoCredito;
+            totalFinal += recargoAplicado;
+            
             break;
 
         default:
@@ -117,6 +117,26 @@ do
 }
 while (opcionPago != 1 && opcionPago != 2 && opcionPago != 3);
 
+// ETAPA 6
+
+decimal descuentoTotal = descuentoAplicado + descuentoMedioPago;
+
+string lineaTicket = "";
+
+for (int i = 0; i < 35; i++)
+{
+    lineaTicket += "-";
+}
+
 Console.WriteLine();
-Console.WriteLine($"Medio de pago: {medioPago}");
-Console.WriteLine($"Total final: ${totalFinal}");
+Console.WriteLine($"{lineaTicket}");
+Console.WriteLine($"         {NombreComercio}");
+Console.WriteLine($"{lineaTicket}");
+Console.WriteLine($"Cajero: {nombreCajero}");
+Console.WriteLine($"Productos: {cantidadProductos}");
+Console.WriteLine($"Subtotal: {total}");
+Console.WriteLine($"Descuento: {descuentoTotal}");
+Console.WriteLine($"Recargo: {recargoAplicado}");
+Console.WriteLine($"{lineaTicket}");
+Console.WriteLine($"TOTAL: {totalFinal}");
+Console.WriteLine($"{lineaTicket}");

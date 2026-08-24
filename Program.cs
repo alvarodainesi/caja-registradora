@@ -74,3 +74,49 @@ Console.WriteLine($"Cantidad de productos: {cantidadProductos}");
 Console.WriteLine($"Subtotal: ${total}");
 Console.WriteLine($"Descuento aplicado: ${descuentoAplicado}");
 Console.WriteLine($"Total con descuento: ${totalConDescuento}");
+
+// ETAPA 5
+
+const decimal DescuentoEfectivo = 0.10m;
+const decimal RecargoCredito = 0.15m;
+
+decimal totalFinal = totalConDescuento;
+int opcionPago;
+string medioPago = "";
+
+do
+{
+    Console.WriteLine();
+    Console.WriteLine("Medio de pago:");
+    Console.WriteLine("1 - Efectivo");
+    Console.WriteLine("2 - Débito");
+    Console.WriteLine("3 - Crédito");
+    Console.Write("Opción: ");
+    opcionPago = int.Parse(Console.ReadLine());
+
+    switch (opcionPago)
+    {
+        case 1:
+            totalFinal -= totalFinal * DescuentoEfectivo;
+            medioPago = "Efectivo";
+            break;
+
+        case 2:
+            medioPago = "Débito";
+            break;
+
+        case 3:
+            totalFinal += totalFinal * RecargoCredito;
+            medioPago = "Crédito";
+            break;
+
+        default:
+            Console.WriteLine("Opción inválida. Intente nuevamente.");
+            break;
+    }
+}
+while (opcionPago != 1 && opcionPago != 2 && opcionPago != 3);
+
+Console.WriteLine();
+Console.WriteLine($"Medio de pago: {medioPago}");
+Console.WriteLine($"Total final: ${totalFinal}");
